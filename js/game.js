@@ -234,6 +234,13 @@
     if (el) el.textContent = mistakes + ' / ' + MAX_MISTAKES;
   }
 
+  function updateDeviceStatsDisplay() {
+    var el = document.getElementById('device-stats');
+    if (!el) return;
+    // Hide device-level analytics from the user interface while still tracking them in the background.
+    el.style.display = 'none';
+  }
+
   function startTimer() {
     if (timerInterval) return;
     updateTimerDisplay();
@@ -266,6 +273,7 @@
     updateTimerDisplay();
     updateCompletenessDisplay();
     updateMistakesDisplay();
+    updateDeviceStatsDisplay();
     checkWin();
     checkGameOver();
   }
@@ -285,6 +293,9 @@
     if (window.HoliSudoku.isWon(board, getIncorrectCellsCached())) {
       gameWon = true;
       stopTimer();
+      if (window.HoliSudokuAnalytics && typeof window.HoliSudokuAnalytics.trackGameWin === 'function') {
+        window.HoliSudokuAnalytics.trackGameWin();
+      }
       if (window.HoliSudokuSounds) window.HoliSudokuSounds.playSound('win');
       var winEl = document.getElementById('win-message');
       if (winEl) {
@@ -326,6 +337,9 @@
       gameOver = true;
       stopTimer();
       showGameOverMessage();
+      if (window.HoliSudokuAnalytics && typeof window.HoliSudokuAnalytics.trackGameOver === 'function') {
+        window.HoliSudokuAnalytics.trackGameOver();
+      }
     }
   }
 
@@ -355,6 +369,9 @@
       window.HoliSudokuStorage.save(initialBoard, board, null, false, solution, elapsedSeconds, mistakes, gameOver);
     }
     render();
+    if (window.HoliSudokuAnalytics && typeof window.HoliSudokuAnalytics.trackGameOpen === 'function') {
+      window.HoliSudokuAnalytics.trackGameOpen('new_game');
+    }
     startTimer();
   }
 
@@ -499,6 +516,9 @@
     buildPalette();
     updateSoundToggle();
     render();
+    if (window.HoliSudokuAnalytics && typeof window.HoliSudokuAnalytics.trackGameOpen === 'function') {
+      window.HoliSudokuAnalytics.trackGameOpen('initial_load');
+    }
     if (!gameWon) startTimer();
     var boardEl = document.getElementById('board');
     var paletteEl = document.getElementById('palette');

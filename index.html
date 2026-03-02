@@ -5,16 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Holi Sudoku</title>
   <link rel="stylesheet" href="styles.css">
+  <!-- Google Analytics 4: Holi Sudoku -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-GDXJL0BMTK"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-GDXJL0BMTK');
+  </script>
 </head>
 <body>
   <main id="app">
-    <h1 class="app-title">Holi Sudoku</h1>
+    <h1 class="app-title">Let's play Holi!!!</h1>
     <button type="button" id="rules-btn" class="btn-rules" aria-label="खेल के नियम">नियम</button>
     <div class="stats">
       <div id="timer" class="timer" aria-live="polite">0:00</div>
       <div id="completeness" class="completeness" aria-live="polite">0 / 81</div>
       <div id="mistakes" class="mistakes" aria-live="polite">0 / 5</div>
       <button type="button" id="sound-toggle" class="btn-sound" aria-label="Sound on">Sound on</button>
+      <div id="device-stats" class="device-stats" aria-live="polite"></div>
     </div>
     <div id="board" class="board" aria-label="Sudoku grid"></div>
     <div id="palette" class="palette" aria-label="Color palette"></div>
@@ -53,6 +62,7 @@
       <button type="button" id="rules-close" class="rules-modal__close">बंद करें</button>
     </div>
   </div>
+  <script src="js/analytics.js"></script>
   <script src="js/sounds.js"></script>
   <script src="js/board.js"></script>
   <script src="js/validation.js"></script>
