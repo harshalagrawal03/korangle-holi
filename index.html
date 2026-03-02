@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Holi Sudoku</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main id="app">
+    <h1 class="app-title">Holi Sudoku</h1>
+    <button type="button" id="rules-btn" class="btn-rules" aria-label="खेल के नियम">नियम</button>
+    <div class="stats">
+      <div id="timer" class="timer" aria-live="polite">0:00</div>
+      <div id="completeness" class="completeness" aria-live="polite">0 / 81</div>
+      <div id="mistakes" class="mistakes" aria-live="polite">0 / 5</div>
+      <button type="button" id="sound-toggle" class="btn-sound" aria-label="Sound on">Sound on</button>
+    </div>
+    <div id="board" class="board" aria-label="Sudoku grid"></div>
+    <div id="palette" class="palette" aria-label="Color palette"></div>
+    <button type="button" id="clear-cell" class="btn-clear-cell" aria-label="Clear selected cell">Clear</button>
+    <button type="button" id="new-puzzle" class="btn-new-puzzle">New Game</button>
+  </main>
+  <div id="win-message" class="win-message" aria-live="polite" hidden>
+    <div class="win-message__content">
+      <p class="win-message__title">You won!</p>
+      <p class="win-message__text">All colors are in place. Happy Holi!</p>
+      <div class="win-message__actions">
+        <button type="button" id="win-dismiss" class="win-message__btn win-message__btn--secondary">Close</button>
+        <button type="button" id="win-new-game" class="win-message__btn win-message__btn--primary">New Game</button>
+      </div>
+    </div>
+  </div>
+  <div id="game-over-message" class="game-over-message" aria-live="polite" hidden>
+    <div class="game-over-message__content">
+      <p class="game-over-message__title">Game Over</p>
+      <p class="game-over-message__text">Too many mistakes. Try again!</p>
+      <button type="button" id="game-over-new-game" class="game-over-message__btn">New Game</button>
+    </div>
+  </div>
+  <div id="rules-modal" class="rules-modal" aria-labelledby="rules-title" aria-modal="true" hidden>
+    <div class="rules-modal__content">
+      <h2 id="rules-title" class="rules-modal__title">खेल के नियम</h2>
+      <div class="rules-modal__body">
+        <p><strong>होली सुडोकू</strong> एक 9×9 ग्रिड का खेल है।</p>
+        <ul>
+          <li><strong>उद्देश्य:</strong> खाली खानों को रंग भरकर पूरा करें ताकि हर पंक्ति, हर कॉलम और हर 3×3 बॉक्स में एक रंग एक ही बार आए।</li>
+          <li><strong>खेलना:</strong> कोई खाना चुनें, फिर उसमें रंग भरें। गलत रंग भरने पर गलती गिनी जाती है।</li>
+          <li><strong>गलतियाँ:</strong> 5 गलतियाँ होने पर खेल खत्म हो जाता है।</li>
+          <li><strong>जीत:</strong> सभी 81 खाने सही रंग से भर जाएँ और पाँच से कम गलती हो तो आप जीत जाते हैं। होली मुबारक!</li>
+        </ul>
+      </div>
+      <button type="button" id="rules-close" class="rules-modal__close">बंद करें</button>
+    </div>
+  </div>
+  <script src="js/sounds.js"></script>
+  <script src="js/board.js"></script>
+  <script src="js/validation.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/puzzles.js"></script>
+  <script src="js/generator.js"></script>
+  <script src="js/game.js"></script>
+</body>
+</html>
